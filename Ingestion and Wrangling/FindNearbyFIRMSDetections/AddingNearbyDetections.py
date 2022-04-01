@@ -62,22 +62,18 @@ def MilitaryConvert(MilInput):
 
 #here create a universal date time column which can be comparable to other observations 
 df['hour'] = df['acq_time'].apply(GetHour) #make the exclusive hour column
-dfb['hour'] = dfb['acq_time'].apply(GetHour) #TEST DF make the exclusive hour column
 df['time'] = df['acq_time'].apply(MilitaryConvert) #get an accurate time column in HH:MM format
-dfb['time'] = dfb['acq_time'].apply(MilitaryConvert) #TEST DF get an accurate time column in HH:MM format
 df['newdatetime'] = df['acq_date'] + ' ' + df['time'] #create a combined date time column, its a string at this point  
-dfb['newdatetime'] = dfb['acq_date'] + ' ' + dfb['time'] #TEST DF create a combined date time column, its a string at this point  
 df['newdatetime'] = pd.to_datetime(df['newdatetime'], format = '%Y-%m-%d %H:%M') #converts the acq_date column to date time format
-dfb['newdatetime'] = pd.to_datetime(dfb['newdatetime'], format = '%Y-%m-%d %H:%M') #TEST DF converts the acq_date column to date time format
 
 #now filter by things within a recent time (-1 day) and same rounded lat long 
 #note that one latitude degree is ~69 miles so .01 latitude deg is ~0.69 miles
 #also note one longitude degree is ~54.6 miles so .01 longitude degree is about ~0.546 miles
 targetdelta_neg = pd.Timedelta(days=-1) #we will call it a match if one was detected more than once in a day in the area  
 targetdelta_pos = pd.Timedelta(days=0) #get the timedelta for 0, because we want to see recent things not future things 
-dfb['nearbydetections'] = np.nan #creates the column for number of recent occurences we will populate with the loop below
-for index, row in dfb.iterrows():
-    tmp = dfb[['lat', 'long', 'newdatetime']] #creates a temp df identical to the main for filtering 
+df['nearbydetections'] = np.nan #creates the column for number of recent occurences we will populate with the loop below
+for index, row in df.iterrows():
+    tmp = df[['lat', 'long', 'newdatetime']] #creates a temp df identical to the main for filtering 
     targetdatetime = row['newdatetime'] #identifies the datetime of the row 
     tmp['delta'] = tmp['newdatetime'] - targetdatetime #creates a new column of the difference between time 
     mask = tmp['delta'] <= targetdelta_pos #create a mask to filter out future observations  
@@ -89,7 +85,7 @@ for index, row in dfb.iterrows():
     tmp = tmp[(tmp['lat'] == targetlat) & (tmp['long'] == targetlong)] #filters the temp df to match the targets lat and long
     numdetections = tmp.shape[0] #number of rows left in the tmp df
     numdetections = numdetections - 1 #the target row was still in the tmp df, subtract one to account for it
-    dfb.at[index, 'nearbydetections'] = numdetections #update the value
+    df.at[index, 'nearbydetections'] = numdetections #update the value
 
 
 
