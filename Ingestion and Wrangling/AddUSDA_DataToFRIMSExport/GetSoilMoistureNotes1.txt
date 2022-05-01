@@ -1,0 +1,59 @@
+You can get soil moisture data from the USDA website. There are stations set up throughout the country which collect dtata on soil moisture, relative humidity, etc. 
+
+Reports are generated using this link:
+https://wcc.sc.egov.usda.gov/reportGenerator/
+
+The interactive map can be used to view station locations and easily select reports into genetrator:
+https://www.nrcs.usda.gov/wps/portal/wcc/home/quicklinks/imap 
+
+There are 2 types of networks. SCAN and SNOTEL.
+
+The map metadata excport csv is info on stations 
+
+About the report generator:
+https://www.nrcs.usda.gov/wps/portal/wcc/home/dataAccessHelp/helpCenters/reportGeneratorHelp/
+
+Can also explore other stuff with this website:
+https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/survey/tools/?cid=nrcseprd1406827 
+
+The report is limited to a number of rows/records.
+
+FIRMS exports can be merged with the nearest station dat for the date by using the code in the "AttachUSDA_SCANDataToFIRMS_Vxx.py" code.
+
+Used the following USDA fields to start:
+	Station Id	
+	State Code
+	Network Code
+	Station Name
+	Elevation
+	Latitude
+	Longitude
+	County Name
+	HUC2 (2-digit)
+	HUC2 Name
+	HUC4 (4-digit)
+	HUC4 Name
+	HUC12 (12-digit)
+	HUC12 Name
+	Start Date
+	End Date
+	snow depth
+	precipitation accumulation
+	precipitation increment
+	precipitation month-to-date
+	soil moisture percent
+	soil moisture percent
+	soil moisture percent
+	soil moisture percent
+	soil moisture percent
+	dew point temperature
+	relative humidity
+	relative humidity average
+	relative humidity enclosure
+	wind movement total
+	wind speed average
+	wind speed average
+	wind speed average
+	wind speed maximum
+	wind speed maximum
+	wind speed maximum
