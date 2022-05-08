@@ -1,0 +1,16 @@
+Descriptions of each of the iterations of tables used to merge data for team alaignment and traceability
+
+MergeTable1_FirmsAndSmWfigs2Round.csv':
+	-Python code used: FullTableCreation2.py
+	-FIRMS Jan 1, 2018 to March 30, 2022 (Both MODIS and VIIRS instruments)
+	-Smaller WFIGS data (~50,000 row table) merged
+	-Merged based on key created from location (lat and long) + date
+	-Rounded lat and long to 2 decimal places 
+	
+MergeTable2_FirmsAndSmWfigs1Round.csv':
+	-Python code used: FullTableCreation2.py
+	-FIRMS Jan 1, 2018 to March 30, 2022 (Both MODIS and VIIRS instruments)
+	-Smaller WFIGS data (~50,000 row table) merged
+	-Merged based on key created from location (lat and long) + date
+	-Rounded lat and long to 1 decimal places 
+	
