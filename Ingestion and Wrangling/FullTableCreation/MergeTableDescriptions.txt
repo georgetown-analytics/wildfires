@@ -34,3 +34,10 @@ MergeTable4_FirmsAndBigWfigs1Round.csv:
 	-Rounded lat and long to 1 decimal places 
 	-Resulting Number of FIRMS to WFIGS matches: 63,846 (10,888 unique WFIGS events)
 
+FIRMSandSCANFull2018toApr2022.csv:
+	-Python code used: FIRMSandSCANMerge.py 
+	-FIRMS Jan 1, 2018 to March 30, 2022 (Both MODIS and VIIRS instruments)
+	-USDA SCAN full export of selected releveant columns from 'USDAJan2018ToMar2022.csv'
+	-This table is basically almost 3.5 years of FIRMS data with weather data attached. will be good starting point for later merges 
+
+
