@@ -27,7 +27,7 @@ import numpy as np
 import geopy.distance  
 
 #import the 2 csvsand merge them. 
-#FOR RUNNING THIS ON OWN: you will have to change the csv location/name 
+#TODO FOR RUNNING THIS ON OWN: you will have to change the csv location/name 
 dfa = pd.read_csv(r'C:\Users\anderb4\Documents\GeorgetownDSCert\WildfireCapstone\Data\Modis20to22\fire_archive_M-C61_258142.csv')
 dfb = pd.read_csv(r'C:\Users\anderb4\Documents\GeorgetownDSCert\WildfireCapstone\Data\Modis20to22\fire_nrt_M-C61_258142.csv')
 df = pd.concat([dfa, dfb]) #concatonate the data 
@@ -40,7 +40,7 @@ dfb['lat'] = round(dfb['latitude'])
 dfb['long'] = round(dfb['longitude'])
 
 #now read the USDA exports 
-#FOR DOING THIS ON OWN: Chan ge file name/path to your own USDA export
+#TODO FOR DOING THIS ON OWN: Chan ge file name/path to your own USDA export
 df_SCAN2020 = pd.read_csv('SCANSelectedData2020.csv')
 df_SCAN2021 = pd.read_csv('SCANSelectedData2021.csv')
 dfSCAN = pd.concat([df_SCAN2020, df_SCAN2021]) #concatonate the scan data
@@ -84,9 +84,8 @@ def CalcDistDF(row):
 #attach nearest station to each detection 
 df['nearestStation'] = '' #nearest station name 
 df['StationDist'] = np.nan #will be distance between the detection and nearest station 
-df['StationDateKey'] = '' #will serve as a key fpr station + day data 
-dfTest2 = df.iloc[:1000] #CHANFGE TO FULL DF create a smaller test df
-progressCounter = 0 
+dfTest2 = df.iloc[:1000] #create a smaller test df
+progressCounter = 0
 for index, i in df.iterrows():
     tmp = dfStation #creates a temp station df
     tmp['latcompare'] = i['latitude'] #enters the detection point lat in temp df
@@ -96,17 +95,16 @@ for index, i in df.iterrows():
     topStation = tmp.iloc[0] #gets the top station 
     df.at[index, 'nearestStation'] = topStation['Station Name'] #populates the nearest station name 
     df.at[index, 'StationDist'] = topStation['CalcDist'] #populates how far away the station is
-    df.at[index, 'StationDateKey'] = topStation['Station Name'] + ';' + i['acq_date'] #populates the station + date key 
-    #print('on line: ' + str(progressCounter))
-    #progressCounter = progressCounter + 1
-    
+    if progressCounter%10000 == 0:
+        print('on line: ' + str(progressCounter)) #print the progress every 10000
+    progressCounter = progressCounter + 1
 
-#merge the data frames to get weather data 
-dfSCAN['datestr'] = dfSCAN['date_new'].dt.strftime('%Y-%m-%d') #converts SCAN date to a similar string as main FIRMS df
-dfSCAN['StationDatekey'] = dfSCAN['Station Name'] + ';' + dfSCAN['datestr'] #creates key for merging the dfs
-df = df.merge(dfSCAN, how='left', left_on='StationDateKey', right_on='StationDatekey')
 
-df.to_csv('FIRMSandSCAN20To21.csv')
+#the nearest station is now in the FIRMS dataframe 
+#now merge the SCAN datframe by station and date to the FIRMS dataframe 
+dfMerge = df.merge(dfSCAN, left_on=['nearestStation', 'newdate'], right_on=['Station Name', 'date_new'], how='left') 
+
+#dfMerge.to_csv('FIRMSandSCAN20To21_Try4.csv') #TODO name the csv you wanty to save 
 
 """
 This ran successfully for me and output the csv above with the merged USDA data with each FIRMS detection
@@ -114,4 +112,8 @@ This ran successfully for me and output the csv above with the merged USDA data 
 The merged data includes soil moisture, relative humidity, average wind speed, etc.  
 
 """
+
+
+
+
 
