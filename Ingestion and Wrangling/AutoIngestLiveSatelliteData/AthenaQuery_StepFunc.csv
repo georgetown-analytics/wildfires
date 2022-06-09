@@ -1,0 +1,19 @@
+SELECT * 
+FROM
+
+    (
+    SELECT 
+            lt.frp AS wf_id,
+            lt.longitude AS wf_long,
+            lt.latitude AS wf_lat,
+            st.longitude AS stat_long,
+            st.latitude AS stat_lat,
+            st.id AS stat_id,
+            ST_DISTANCE(ST_POINT(lt.longitude, lt.latitude), ST_POINT(st.longitude, st.latitude)) AS stat_dist,
+            row_number() over (PARTITION BY lt.frp) AS row_num
+    FROM "default".firmsauto AS lt
+    LEFT OUTER JOIN "default".noaa_stations AS st
+        ON ST_CONTAINS(ST_BUFFER(ST_POINT(lt.longitude, lt.latitude),.5), ST_POINT(st.longitude, st.latitude))
+    )
+    
+WHERE row_num <2;
