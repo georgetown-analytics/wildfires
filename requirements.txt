@@ -1,0 +1,18 @@
+yellowbrick
+pandas
+sklearn
+matplotlib
+numpy
+seaborn 
+pickle
+scipy
+seaborn
+geopy
+meteostat
+jupyter
+tkinter
+boto3
+math
+warnings 
+import boto3
+import sqlite3 
