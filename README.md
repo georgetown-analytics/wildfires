@@ -7,7 +7,7 @@ Wildfires have become a growing concern in American society over the past few ye
 
 The team found data sources of both past wildfire occurrences as well as potential fire start data through satellite detections. NASA Fire Information for Resource Management System (FIRMS) is a system of satellite data which detects potential fires around the world. A significant portion of FIRMS satellite detections are false alarms or do not lead to major fires. The project seeks to predict wildfires based on certain starting factors, specifically satellite detections from NASA FIRMS merged with ground and weather conditions from the USDA. 
 
-!(figures/ProjectPipeline.png)
+![alt text](https://github.com/georgetown-analytics/wildfires/blob/main/figures/ProjectPipeline.PNG)
 
 ## Approach 
 
