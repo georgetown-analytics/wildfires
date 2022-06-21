@@ -26,4 +26,5 @@ Combining these features with more advanced metrics, the team used various machi
 The best performing model was an extra trees classifier which had a precision of 0.904, recall of 0.581, and an F1 of 0.708 on the data frame which was randomly split into test and train data sets. The model was saved and exposed to new data and was able to predict several new fires on the day of the wildfire start between the months of April and June 2022. This was shown during the day of the project presentation and can be found in the “NewDataDemo” section of the repository.
 
 Link to the demo:
+
 https://github.com/georgetown-analytics/wildfires/blob/main/NewDataDemo/Testing%20Model%20Out%20With%20More%20Recent%20Data%20Full%20Apr1-June8.ipynb
